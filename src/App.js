@@ -1,12 +1,12 @@
 import './App.css'
-import {Provider}  from 'react-redux'
+import { Provider }  from 'react-redux'
 import store from './store'
-import Preview from './components/Preview'
+import Router from './Router'
 
 function App() {
   return (
     <Provider store={store}>
-      <Preview />
+      <Router />
     </Provider>
   );
 }

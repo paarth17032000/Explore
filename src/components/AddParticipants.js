@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import TextField from "@material-ui/core/TextField"
-import { Box, Button, Container, makeStyles} from "@material-ui/core"
+import { Button, Container, makeStyles} from "@material-ui/core"
 import { participantNumber } from "../redux/actions.js/participantsAction";
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
   root: {
@@ -25,8 +26,7 @@ const useStyles = makeStyles({
 function AddParticipants({participantNumber}) {
     const [val, setVal] = useState()
     const classes = useStyles();
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const handleSubmit = () => {
         participantNumber(parseInt(val))
     }
     return (
@@ -42,14 +42,16 @@ function AddParticipants({participantNumber}) {
                 label="Number of Participants"
                 onChange={ (e) => { setVal(e.target.value) }}
                 />
-                <Button 
-                variant="contained" 
-                color="primary"
-                type="submit"
-                onClick={handleSubmit}
-                >
-                    Next
-                </Button>
+                    <Button 
+                    variant="contained" 
+                    color="primary"
+                    component={Link}
+                    to="/participants"
+                    type="submit"
+                    onClick={handleSubmit}
+                    >
+                      Next
+                    </Button>
             </form>
         </Container>
     );

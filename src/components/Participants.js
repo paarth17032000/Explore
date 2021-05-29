@@ -1,16 +1,16 @@
-import { Container, TextField } from '@material-ui/core'
+import { Container } from '@material-ui/core'
 import React from 'react'
 import { connect } from 'react-redux'
 
 function Participants(props) {
     const { numberOfParticipants } = props
-    console.log(numberOfParticipants)
+    console.log(props)
+    // numberOfParticipants
     return(
         <Container>
             { numberOfParticipants }
         </Container>
     )
-    
 }
 
 const mapStateToProps = (state) => {
