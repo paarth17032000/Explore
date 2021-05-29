@@ -7,7 +7,9 @@ import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor: "#badc58"
+    backgroundColor: "#badc58",
+    minHeight: 'calc(92.6vh)',
+    color: '#ffffff'
   },
   m: {
     margin: "20px"
@@ -30,30 +32,30 @@ function AddParticipants({participantNumber}) {
         participantNumber(parseInt(val))
     }
     return (
-        <Container>
-            <form 
-            className={classes.form}
+      <Container>
+          <form 
+          className={`${classes.form} ${classes.root}`}
+          >
+            <TextField
+            className={classes.m}
+            error={false}
+            variant="standard"
+            id="standard-error"
+            label="Number of Participants"
+            onChange={ (e) => { setVal(e.target.value) }}
+            />
+            <Button 
+            variant="contained" 
+            color="primary"
+            component={Link}
+            to="/participants"
+            type="submit"
+            onClick={handleSubmit}
             >
-                <TextField
-                className={classes.m}
-                error={false}
-                variant="standard"
-                id="standard-error"
-                label="Number of Participants"
-                onChange={ (e) => { setVal(e.target.value) }}
-                />
-                    <Button 
-                    variant="contained" 
-                    color="primary"
-                    component={Link}
-                    to="/participants"
-                    type="submit"
-                    onClick={handleSubmit}
-                    >
-                      Next
-                    </Button>
-            </form>
-        </Container>
+              Next
+            </Button>
+          </form>
+      </Container>
     );
 }
 
