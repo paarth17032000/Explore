@@ -11,12 +11,13 @@ export const participantNumber = (numberOfParticipants) => {
     )
 }
 
-export const participants = (num) => {
+export const participants = (name, id) => {
     return(
         {
             type: "participants",
             payload: {
-                num: num
+                id: id,
+                name: name
             }
         }
     )

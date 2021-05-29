@@ -1,10 +1,8 @@
 // init state []
 const initState = {
     numberOfParticipants: 0,
-    participants: [
-        "avcd",
-        "dsbr"
-    ],
+    participants: [],
+    participantVotes: []
 }
 
 let id = 0
@@ -18,20 +16,18 @@ const participantsReducer = (state = initState, action) => {
             }
 
         case "participants":
+            let name = action.payload.name;
             return {
                 ...state,
-                
-                // for (let i = 0; i < numberOfParticipants; i++) {
-                    
-                    
-                // },
-
+            
                 participants: [
+                    ...state.participants,
                     {
-                        id: ++id,
-                        fname: action.payload.participants.fname
+                        id: action.payload.id,
+                        name: action.payload.name,
                     }
                 ]
+
             }
 
         default :

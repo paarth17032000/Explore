@@ -13,14 +13,23 @@ store.subscribe( () => {
 // store.dispatch({
 //     type: "participantNumber",
 //     payload: {
-//         numberOfParticipants: '3'
+//         numberOfParticipants: 2
 //     }
 // })
 
 // store.dispatch({
 //     type: "participants",
 //     payload: {
-//         num: 2
+//         id: 1,
+//         name: 'yoshi'
+//     }
+// })
+
+// store.dispatch({
+//     type: "participants",
+//     payload: {
+//         id: 2,
+//         name: 'John'
 //     }
 // })
 

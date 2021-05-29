@@ -28,33 +28,34 @@ const useStyles = makeStyles({
 function AddParticipants({participantNumber}) {
     const [val, setVal] = useState()
     const classes = useStyles();
-    const handleSubmit = () => {
-        participantNumber(parseInt(val))
+    const handleSubmit = (e) => {
+      participantNumber(parseInt(val))
     }
     return (
       <Container>
-          <form 
-          className={`${classes.form} ${classes.root}`}
+        <form 
+        className={`${classes.form} ${classes.root}`}
+        // onSubmit={handleSubmit}
+        >
+          <TextField
+          className={classes.m}
+          error={false}
+          variant="standard"
+          id="standard-error"
+          label="Number of Participants"
+          onChange={ (e) => { setVal(e.target.value) }}
+          />
+          <Button 
+          variant="contained" 
+          color="primary"
+          component={Link}
+          to="/participants"
+          type="submit"
+          onClick={handleSubmit}
           >
-            <TextField
-            className={classes.m}
-            error={false}
-            variant="standard"
-            id="standard-error"
-            label="Number of Participants"
-            onChange={ (e) => { setVal(e.target.value) }}
-            />
-            <Button 
-            variant="contained" 
-            color="primary"
-            component={Link}
-            to="/participants"
-            type="submit"
-            onClick={handleSubmit}
-            >
-              Next
-            </Button>
-          </form>
+            Next
+          </Button>
+        </form>
       </Container>
     );
 }

@@ -1,6 +1,8 @@
 import { Container, makeStyles, Typography, TextField, Button, Box, Grid} from '@material-ui/core'
-import React, { useState } from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { participants } from '../redux/actions.js/participantsAction'
 
 const useStyles = makeStyles({
   root: {
@@ -18,44 +20,49 @@ const useStyles = makeStyles({
         marginTop: '45px',
     },
     color: {
-        backgroundColor: '#fbc531',
+        // backgroundColor: '#fbc531',
+        textAlign: 'center'
     }
 })
 
-const handleName = (e) => {
-    console.log(e)
-}
-
 function Participants(props) {
     const classes = useStyles()
-    const [name, setName] = useState('')
-    const { numberOfParticipants } = props
-    console.log(props)
-    let Names = []
+
+    const { numberOfParticipants, participants} = props
+    // participants('hello', 2);
+    // console.log(props)
+
+    const handleName = (e,i) => {
+        participants(e.target.value,i)
+        console.log(i,e.target.value)
+    }
+
+    let names = []
     for (let i = 1; i <= numberOfParticipants; i++) {
-        Names.push(
+        names.push(
             <TextField
             variant="standard"
             error={false}
             key={i}
             className={classes.mp}
-            sx={{m: 1, p: 1}}
             label={`Partcipant Name ${i}`}
-            // name={name}
-            onChange={ handleName }
+            onChange={ e => handleName(e,i) }
             />
         )
     }
+
     return(
         <Container className={classes.root}> 
 
         { numberOfParticipants ? ( 
             <Box>
+
                 <Grid container spacing={3} className={classes.color}>
-                    { Names.map( element => {
+                    { names.map( element => {
+                        console.log(element.key)
+                        // let key = key+1
                         return(
-                            <Grid item xs={12} sm={6} xl={4}  key={element.key}>
-                                {console.log(element.key)}
+                            <Grid item xs={12} sm={6} xl={3} key={element.key} >
                                 {element}
                             </Grid>
                         )
@@ -67,6 +74,9 @@ function Participants(props) {
                     variant="contained"
                     color="primary"
                     align="center"
+                    component={Link}
+                    to="/vote"
+                    type="submit"
                     className={`${classes.btn}`}
                     >
                         Next
@@ -92,10 +102,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return{
-//         Participants: () => dispatch()
-//     }
-// }
+const mapDispatchToProps = (dispatch) => {
+    return{
+        participants: (e) => dispatch(participants(e))
+    }
+}
 
-export default connect(mapStateToProps)(Participants)
+export default connect(mapStateToProps, mapDispatchToProps)(Participants)
