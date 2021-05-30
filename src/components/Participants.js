@@ -1,5 +1,5 @@
 import { Container, makeStyles, Typography, TextField, Button, Box, Grid} from '@material-ui/core'
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { participants } from '../redux/actions.js/participantsAction'
@@ -28,18 +28,26 @@ const useStyles = makeStyles({
 function Participants(props) {
     const classes = useStyles()
 
-    const { numberOfParticipants, participants} = props
-    // participants('hello', 2);
-    // console.log(props)
+    const { numberOfParticipants, participants} = props;
 
+    let namesArr= [];
     const handleName = (e,i) => {
-        participants(e.target.value,i)
-        console.log(i,e.target.value)
+        i -= 1;
+        namesArr[i] = e.target.value;
     }
 
-    let names = []
+    const handleClick = () => {
+        let index = 1;
+        namesArr.forEach( item => {
+            participants(item,index)
+            console.log(index,item)
+            index++
+        })
+    }
+
+    let namesTag = []
     for (let i = 1; i <= numberOfParticipants; i++) {
-        names.push(
+        namesTag.push(
             <TextField
             variant="standard"
             error={false}
@@ -58,9 +66,8 @@ function Participants(props) {
             <Box>
 
                 <Grid container spacing={3} className={classes.color}>
-                    { names.map( element => {
+                    { namesTag.map( element => {
                         console.log(element.key)
-                        // let key = key+1
                         return(
                             <Grid item xs={12} sm={6} xl={3} key={element.key} >
                                 {element}
@@ -78,6 +85,7 @@ function Participants(props) {
                     to="/vote"
                     type="submit"
                     className={`${classes.btn}`}
+                    onClick={handleClick}
                     >
                         Next
                     </Button>
@@ -104,7 +112,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        participants: (e) => dispatch(participants(e))
+        participants: (name,id) => dispatch(participants(name,id))
     }
 }
 

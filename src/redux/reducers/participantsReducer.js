@@ -16,7 +16,7 @@ const participantsReducer = (state = initState, action) => {
             }
 
         case "participants":
-            let name = action.payload.name;
+            console.log(11,state)
             return {
                 ...state,
             
@@ -24,10 +24,25 @@ const participantsReducer = (state = initState, action) => {
                     ...state.participants,
                     {
                         id: action.payload.id,
-                        name: action.payload.name,
+                        name: action.payload.name
                     }
-                ]
+                ],
 
+                participantVotes: [
+                    ...state.participantVotes,
+                    // participantVotes[action.payload.id] = 0
+                ],
+
+            }
+
+        case "participantVote":
+            // console.log(1111)
+            return{
+                ...state,
+                participantVotes : [
+                    ...state.participantVotes,
+                    console.log(state.participantVotes)
+                ]
             }
 
         default :

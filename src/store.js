@@ -1,6 +1,6 @@
 import {createStore} from 'redux'
 import rootReducer from './redux/rootReducer'
-// import {participantNumber} from './redux/actions.js/participantsAction'
+// import {participantVote} from './redux/actions.js/participantsAction'
 
 const store = createStore(rootReducer);
 
@@ -10,28 +10,36 @@ store.subscribe( () => {
 })
 
 
+store.dispatch({
+    type: "participantNumber",
+    payload: {
+        numberOfParticipants: 2
+    }
+})
+
+store.dispatch({
+    type: "participants",
+    payload: {
+        id: 1,
+        name: 'yoshi'
+    }
+})
+
+store.dispatch({
+    type: "participants",
+    payload: {
+        id: 2,
+        name: 'dev ed'
+    }
+})
+
 // store.dispatch({
-//     type: "participantNumber",
+//     type: "participantVote",
 //     payload: {
-//         numberOfParticipants: 2
+//         id: 2
 //     }
 // })
 
-// store.dispatch({
-//     type: "participants",
-//     payload: {
-//         id: 1,
-//         name: 'yoshi'
-//     }
-// })
-
-// store.dispatch({
-//     type: "participants",
-//     payload: {
-//         id: 2,
-//         name: 'John'
-//     }
-// })
 
 // store.dispatch(participantNumber(3))
 

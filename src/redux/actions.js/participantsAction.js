@@ -16,8 +16,19 @@ export const participants = (name, id) => {
         {
             type: "participants",
             payload: {
+                name: name,
                 id: id,
-                name: name
+            }
+        }
+    )
+}
+
+export const participantVote = (id) => {
+    return(
+        {
+            type: "participantVote",
+            payload: {
+                id: id
             }
         }
     )
