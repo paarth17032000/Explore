@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import { Box, Button, Container, makeStyles, Typography} from '@material-ui/core'
 import { connect } from 'react-redux'
 import { participantVote } from '../redux/actions.js/participantsAction'
@@ -28,16 +29,17 @@ const useStyles = makeStyles({
 function Vote(props) {
     const classes = useStyles()
     const { participants, participantVote } = props;
-    console.log(participants)
+    // console.log(participants)
 
-    const handleVote = id => {
+
+    const handleVote = (id) => {
         participantVote(id)
     }
 
     return (
         <>
             <Container className={`${classes.root}`}>
-                <Typography variant="h3" color="primary">
+                <Typography variant="h3" color="secondary">
                     Vote your favourite
                 </Typography>
                 <Box 
@@ -56,9 +58,11 @@ function Vote(props) {
                                 <Button 
                                 variant="contained" 
                                 key={object.id}
+                                component={Link}
+                                to='/Result'
                                 className={classes.mp}
                                 color="primary"
-                                onClick={handleVote(object.id)}
+                                onClick={ () => handleVote(object.id)}
                                 >
                                     {object.name}
                                 </Button>

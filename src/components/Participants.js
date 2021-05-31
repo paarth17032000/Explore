@@ -1,5 +1,5 @@
 import { Container, makeStyles, Typography, TextField, Button, Box, Grid} from '@material-ui/core'
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { participants } from '../redux/actions.js/participantsAction'
@@ -40,7 +40,7 @@ function Participants(props) {
         let index = 1;
         namesArr.forEach( item => {
             participants(item,index)
-            console.log(index,item)
+            // console.log(index,item)
             index++
         })
     }
@@ -67,7 +67,7 @@ function Participants(props) {
 
                 <Grid container spacing={3} className={classes.color}>
                     { namesTag.map( element => {
-                        console.log(element.key)
+                        // console.log(element.key)
                         return(
                             <Grid item xs={12} sm={6} xl={3} key={element.key} >
                                 {element}

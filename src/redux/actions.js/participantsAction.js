@@ -1,9 +1,12 @@
 //  actions
 
+// importing action types
+import * as actions from './actionTypes'
+
 export const participantNumber = (numberOfParticipants) => {
     return(
         {
-            type: "participantNumber",
+            type: actions.participantNumber,
             payload: {
                 numberOfParticipants: numberOfParticipants
             }
@@ -14,7 +17,7 @@ export const participantNumber = (numberOfParticipants) => {
 export const participants = (name, id) => {
     return(
         {
-            type: "participants",
+            type: actions.participants,
             payload: {
                 name: name,
                 id: id,
@@ -26,7 +29,7 @@ export const participants = (name, id) => {
 export const participantVote = (id) => {
     return(
         {
-            type: "participantVote",
+            type: actions.participantVote,
             payload: {
                 id: id
             }

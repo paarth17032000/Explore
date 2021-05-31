@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 function AddParticipants({participantNumber}) {
     const [val, setVal] = useState()
     const classes = useStyles();
-    const handleSubmit = (e) => {
+    const handleSubmit = () => {
       participantNumber(parseInt(val))
     }
     return (

@@ -1,3 +1,6 @@
+// importing action types
+import * as actions from '../actions.js/actionTypes'
+
 // init state []
 const initState = {
     numberOfParticipants: 0,
@@ -5,18 +8,17 @@ const initState = {
     participantVotes: []
 }
 
-let id = 0
+// let id = 0
 // reducer
 const participantsReducer = (state = initState, action) => {
     switch(action.type){
-        case "participantNumber":
+        case actions.participantNumber :
             return {
                 ...state,
                 numberOfParticipants: action.payload.numberOfParticipants
             }
 
-        case "participants":
-            console.log(11,state)
+        case actions.participants :
             return {
                 ...state,
             
@@ -30,19 +32,25 @@ const participantsReducer = (state = initState, action) => {
 
                 participantVotes: [
                     ...state.participantVotes,
-                    // participantVotes[action.payload.id] = 0
-                ],
-
+                    {
+                        id: action.payload.id,
+                        vote: 0
+                    }
+                ]
             }
 
-        case "participantVote":
-            // console.log(1111)
+        case actions.participantVote :
             return{
                 ...state,
-                participantVotes : [
-                    ...state.participantVotes,
-                    console.log(state.participantVotes)
-                ]
+
+                participantVotes: state.participantVotes.map( object => {
+                    return(
+                        object.id !== action.payload.id ?  object : {
+                            ...object,
+                            vote : object.vote+1
+                        }
+                    )
+                })
             }
 
         default :
