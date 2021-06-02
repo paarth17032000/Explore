@@ -8,7 +8,6 @@ const initState = {
     participantVotes: []
 }
 
-// let id = 0
 // reducer
 const participantsReducer = (state = initState, action) => {
     switch(action.type){
