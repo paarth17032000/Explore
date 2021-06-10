@@ -1,6 +1,6 @@
 import './App.css'
-import { Provider }  from 'react-redux'
-import store from './store'
+import {BrowserRouter} from 'react-router-dom'
+import ThemeProvider from './theme/ThemeProvider'
 import Router from './Router'
 import { CssBaseline } from '@material-ui/core';
 // import {makeStyles} from '@material-ui/core'
@@ -14,12 +14,12 @@ import { CssBaseline } from '@material-ui/core';
 function App() {
   // const classses = useStyles()
   return (
-    <Provider store={store}>
-      <CssBaseline />
-      <div>
+    <ThemeProvider>
+      <BrowserRouter>
+        <CssBaseline />
         <Router />
-      </div>
-    </Provider>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

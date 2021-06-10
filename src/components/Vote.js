@@ -1,8 +1,20 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { Box, Button, Container, makeStyles, Typography} from '@material-ui/core'
+import { Box, Button, Container, makeStyles, styled, Typography} from '@material-ui/core'
+// import {experimentalStyled } from '@material-ui/styles'
 import { connect } from 'react-redux'
 import { participantVote } from '../redux/actions.js/participantsAction'
+
+
+const VoteButton = styled(Button)(
+    ({theme}) => `
+      background-color: ${theme.primary},
+      text-decoration: none,
+      color: white',
+      padding: 10px 30px,
+
+    `
+  )
 
 const useStyles = makeStyles({
     root: {
@@ -55,17 +67,17 @@ function Vote(props) {
                     { participants ? (
                         participants.map( object => {
                             return(
-                                <Button 
-                                variant="contained" 
+                                <VoteButton
+                                // variant="contained" 
                                 key={object.id}
                                 component={Link}
                                 to='/Result'
-                                className={classes.mp}
-                                color="primary"
+                                // className={classes.mp}
+                                // color="secondary"
                                 onClick={ () => handleVote(object.id)}
                                 >
                                     {object.name}
-                                </Button>
+                                </VoteButton>
                             )
                         })
                     ) : null }
