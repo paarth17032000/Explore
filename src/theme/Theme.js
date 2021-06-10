@@ -1,31 +1,18 @@
 import { createMuiTheme } from "@material-ui/core"
 
-//  defining theme
-const themeColors = {
-    primary: '#2A78FF',
-    secondary: '#2E3647',
-    tertiary: '#F8FAFB',
-}
-
-// const colors = {
-//     primary: {
-//         main: themeColors.primary
-//     },
-//     secondary: {
-//         main: themeColors.secondary
-//     },
-//     // tertiary: {
-//     //     main: themeColors.tertiary
-//     // }
-// }
-
-export const PaarthTheme = createMuiTheme({
-    colors: {
+export const newTheme = createMuiTheme({
+    palette: {
         primary: {
-            main: themeColors.primary
+            main: '#2A78FF'
         },
         secondary: {
-            main: themeColors.secondary
+            main: '#2E3647'
         },
+        warning: {
+            main: '#F8FAFB'
+        }
+        // primary: '#2A78FF',
+        // secondary:'#2E3647',
+        // warning:'#F8FAFB',
     }
 })

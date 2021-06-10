@@ -9,7 +9,8 @@ const useStyles = makeStyles({
   root: {
     backgroundColor: "#badc58",
     minHeight: 'calc(92.6vh)',
-    color: '#ffffff'
+    color: '#ffffff',
+    width: '100%'
   },
   m: {
     margin: "20px"
@@ -22,6 +23,9 @@ const useStyles = makeStyles({
       justifyContent: "center",
       alignItems: "center",
       flexDirection: "column"
+  },
+  color: {
+    backgroundColor: ' #E5E5E5;'
   }
 });
 
@@ -32,7 +36,7 @@ function AddParticipants({participantNumber}) {
       participantNumber(parseInt(val))
     }
     return (
-      <Container>
+      <Container className={classes.color}>
         <form 
         className={`${classes.form} ${classes.root}`}
         // onSubmit={handleSubmit}

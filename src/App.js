@@ -1,25 +1,20 @@
 import './App.css'
 import {BrowserRouter} from 'react-router-dom'
-import ThemeProvider from './theme/ThemeProvider'
+import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
 import Router from './Router'
-import { CssBaseline } from '@material-ui/core';
-// import {makeStyles} from '@material-ui/core'
-
-// const useStyles = makeStyles({
-//   root: {
-//     backgroundColor: '#222f3e'
-//   }
-// })
+import Layout from './components/layout/Layout';
+import {newTheme} from './theme/Theme'
 
 function App() {
-  // const classses = useStyles()
   return (
-    <ThemeProvider>
+    <MuiThemeProvider theme={newTheme}>
       <BrowserRouter>
-        <CssBaseline />
-        <Router />
+        <Layout>
+          <CssBaseline />
+          <Router />
+        </Layout>
       </BrowserRouter>
-    </ThemeProvider>
+    </MuiThemeProvider>
   );
 }
 
