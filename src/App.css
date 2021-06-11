@@ -1,0 +1,37 @@
+/* fonts */
+@font-face {
+    font-family: 'Avenir Regular';
+    src: url('./assests/fonts/AvenirNextLTPro-Regular.otf');
+}
+@font-face {
+    font-family: 'Avenir Demi';
+    src: url('./assests/fonts/AvenirNextLTPro-Demi.otf');
+}
+@font-face {
+    font-family: 'Avenir Medium';
+    src: url('./assests/fonts/AvenirNextLTPro-Medium.otf');
+}
+@font-face {
+    font-family: 'Avenir Bold';
+    src: url('./assests/fonts/AvenirNextLTPro-Bold.otf');
+}
+
+/* font-size */
+.font-14{
+    font-size: 14px;
+}
+.font-16{
+    font-size: 16px;
+}
+.font-18{
+    font-size: 18px;
+}
+.font-20{
+    font-size: 20px;
+}
+.font-24{
+    font-size: 24px;
+}
+.font-28{
+    font-size: 28px;
+}

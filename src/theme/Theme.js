@@ -11,8 +11,12 @@ export const newTheme = createMuiTheme({
         warning: {
             main: '#F8FAFB'
         }
-        // primary: '#2A78FF',
-        // secondary:'#2E3647',
-        // warning:'#F8FAFB',
+    },
+    typography: {
+        fontFamily: 'Avenir Regular',
+        fontWeightLight: 400,
+        fontWeightRegular: 500,
+        fontWeightMedium: 600,
+        fontWeightBold: 700
     }
 })
