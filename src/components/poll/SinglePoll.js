@@ -1,9 +1,9 @@
 import React from 'react'
 import { Box, Button, Container, makeStyles, Typography} from '@material-ui/core'
 import { connect } from 'react-redux'
-// import { participantVote } from '../../redux/actions.js/participantsAction'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
+import { VoteParticipant } from '../../redux/actions.js/participantsAction'
 
 const useStyles = makeStyles({
     root: {
@@ -29,37 +29,30 @@ const useStyles = makeStyles({
 
 function SinglePoll(props) {
     const classes = useStyles()
-    const { poll } = props
-    // const {poll, participantVote} = props
-    console.log(11,poll)
-    // let poll_id = parseInt(props.match.params.poll_id); 
-    // let poll = polls.filter(poll => poll.id === poll_id)
-    // let participants = poll[0].participants
-    // // let participantVotes = poll[0].participantVotes
-    // console.log(poll,participants)
+    const { poll, VoteParticipant } = props
+    // const participantVotes = props.poll.participantVotes
+    const poll_id = props.match.params.poll_id
+    
+    console.log(11, poll_id)
 
     const handleVote = (id) => {
-        // console.log(id)
-        // participantVotes.map(participant => {
-        //     return(
-        //         participant.id !== id ? participant : {
-        //             ...participant,
-        //             votes: participant.votes+1
-        //         }
-        //     )
-        // })
-        
-        // participantVote(poll_id,id)
+        console.log(id)
+        let newParticipantVotes = [];
+        newParticipantVotes = poll.participantVotes.map(participant => {
+            return(
+                participant.id !== id ? participant : {
+                    ...participant,
+                    votes: participant.votes+1
+                }
+            )
+        })
+        // console.log(newParticipantVotes)
+        VoteParticipant(poll_id,newParticipantVotes)
         props.history.push('/')
     }
-
-        // <div>
-        //     Welcome to the poll booth
-        //     { polls ? <PollList polls={polls} /> : <div>Loading..</div>}
-        // </div>
-
-    return (
-        <>
+    
+    if( poll ){
+        return(
             <Container className={`${classes.root}`}>
                 <Typography variant="h3" align="center" color="secondary">
                     Vote your favourite
@@ -74,9 +67,7 @@ function SinglePoll(props) {
                 width="50%"
                 height="auto"
                 >
-                    {/* <div>Go back...</div>  */}
-                    { poll.participants ? (
-                        poll.participants.map( participant => {
+                    { poll.participants.map( participant => {
                             return(
                                 <Button
                                 variant="contained" 
@@ -89,13 +80,17 @@ function SinglePoll(props) {
                                 </Button>
                             )
                         })
-                    ) : <div>Go back...</div> }
+                    }
                 </Box>
             </Container>
-        </>
-    )
-}
 
+        )
+    } else {
+        return(
+            <div>Go back...</div>
+        )
+    }
+}
 
 const mapStateToProps = (state, initProps) => {
     let id = initProps.match.params.poll_id
@@ -107,8 +102,14 @@ const mapStateToProps = (state, initProps) => {
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return{
+        VoteParticipant: (poll_id,newParticipantVotes) => dispatch(VoteParticipant(poll_id,newParticipantVotes))
+    }
+}
+
 export default compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([
         {collection: 'polls'}
     ])
@@ -120,10 +121,12 @@ export default compose(
 //     }
 // }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return{
-//         participantVote: (poll_id,id) => dispatch(participantVote(poll_id,id))
-//     }
-// }
-
 // export default connect(mapStateToProps, mapDispatchToProps)(SinglePoll)
+
+
+// under const {poll} = props
+// let poll_id = parseInt(props.match.params.poll_id); 
+// let poll = polls.filter(poll => poll.id === poll_id)
+// let participants = poll[0].participants
+// // let participantVotes = poll[0].participantVotes
+// console.log(poll,participants)

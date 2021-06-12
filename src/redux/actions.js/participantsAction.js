@@ -37,6 +37,29 @@
 //     )
 // }
 
+export const VoteParticipant = (poll_id,newParticipantVotes) => {
+    return(dispatch, getstate, { getFirebase, getFirestore }) => {
+        const firestore = getFirestore()
+
+        // async call for update
+        firestore.collection('polls').doc(poll_id).update({
+            participantVotes: newParticipantVotes
+        }).then(() => {
+            dispatch({
+                type: "Update_Poll",
+                payload: {
+                    participantVotes: newParticipantVotes
+                }
+            })
+        }).catch((err) => {
+            dispatch({
+                type: "Update_Poll_Error",
+                payload: err
+            })
+        })
+    }
+}
+
 export const AddPoll = (state, participants, participantVotes) => {
     const { numberOfParticipants } = state
     console.log('arrived in actions : ',state)
@@ -81,14 +104,14 @@ export const AddPoll = (state, participants, participantVotes) => {
     }
 }
 
-export const participantVote = (poll_id,id) => {
-    return(
-        {
-            type: "participantVote",
-            payload: {
-                poll_id,
-                id
-            }
-        }
-    )
-}
+// export const participantVote = (poll_id,id) => {
+//     return(
+//         {
+//             type: "participantVote",
+//             payload: {
+//                 poll_id,
+//                 id
+//             }
+//         }
+//     )
+// }
