@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import { Route, Switch } from 'react-router-dom'
+const SinglePoll = lazy(() => import('./components/poll/SinglePoll'))
 const CreatePoll = lazy(() => import('./components/poll/CreatePoll')) 
 const PollList = lazy(() => import('./components/poll/PollList')) 
 const Dashboard = lazy(() => import('./components/dashboard'))
@@ -14,6 +15,7 @@ export default function Router() {
             <Switch>
                 <Route exact path='/' component={Dashboard}/>
                 <Route exact path='/poll' component={CreatePoll} />
+                <Route exact path='/poll/:poll_id' component={SinglePoll} />
                 {/* <Route exact path='/create' component={AddParticipants}/>
                 <Route exact path='/participants' component={Participants} /> */}
                 <Route exact path='/vote' component={Vote} />

@@ -60,10 +60,10 @@
 // export default participantsReducer
 
 // importing action types
-import * as actions from '../actions.js/actionTypes'
+// import * as actions from '../actions.js/actionTypes'
 
 
-let id = 0;
+let id = 3;
 // init state []
 const initState = {
     polls : [
@@ -72,21 +72,21 @@ const initState = {
             desc: 'lorem 20 ffncsoi',
             numberOfParticipants: 2,
             participants: [{id: 1, name: 'ram'},{id: 2, name: 'ramesh'}],
-            participantVotes: [{id: 1, name: 'ram'},{id: 2, name: 'ramesh'}]
+            participantVotes: [{id: 1, votes: 0},{id: 2, votes: 0}]
         },
         {
             id: 2,
             desc: 'lorem 20 ffncsoi',
             numberOfParticipants: 3,
             participants: [{id: 1, name: 'bha'},{id: 2, name: 'mon'},{id: 3, name: 'iop'}],
-            participantVotes: [{id: 1, name: 'bha'},{id: 2, name: 'mon'},{id: 3, name: 'iop'}]
+            participantVotes: [{id: 1, votes: 0},{id: 2, votes: 0},{id: 3, votes: 0}]
         },
         {
             id: 3,
             desc: 'lorem 20 ffncsoi',
             numberOfParticipants: 4,
             participants: [{id: 1, name: 'ram'},{id: 2, name: 'mohan'},{id: 3, name: 'lask'},{id: 4, name: 'sam'}],
-            participantVotes: [{id: 1, name: 'ram'},{id: 2, name: 'mohan'},{id: 3, name: 'lask'},{id: 4, name: 'sam'}]
+            participantVotes: [{id: 1, votes: 0},{id: 2, votes: 0},{id: 3, votes: 0},{id: 4, votes: 0}]
         }
     ]
 }
@@ -94,30 +94,56 @@ const initState = {
 // reducer
 const participantsReducer = (state = initState, action) => {
     switch(action.type){
-        // case actions.participantNumber :
-        //     return {
-        //         ...state,
-        //         polls : [
-        //             ...state.polls,
-        //             {
-        //                 numberOfParticipants: action.payload.numberOfParticipants
-        //             }
-        //         ]
-        //     }
 
-            case "Add_Poll":
-                // console.log('arrived in reducer')
-                return{
-                    polls: [
-                        ...state.polls,
-                        {
-                            id: ++id,
-                            numberOfParticipants: action.payload.numberOfParticipants,
-                            participants: action.payload.participants,
-                            // participantVotes: []
+        case "Add_Poll":
+            console.log('success')
+            // return{
+            //     polls: [
+            //         ...state.polls,
+            //         {
+            //             id: ++id,
+            //             numberOfParticipants: action.payload.numberOfParticipants,
+            //             participants: action.payload.participants,
+            //             participantVotes: action.payload.participantVotes
+            //         }
+            //     ]
+            // }
+
+        case "Add_Poll_Error":
+            console.log('error : ',action.payload)
+            // return{
+            //     polls:[
+
+            //     ]
+            // }
+
+        case "participantVote":
+            // let pollToVote = polls.filter(poll => poll.id === action.payload.poll_id)
+            return{
+                polls: state.polls.map(poll => {
+                    return(
+                        poll.id !== action.payload.poll_id ? poll : {
+                            ...poll,
+                            participantVotes: poll.participantVotes.map(participant => {
+                                return(
+                                    participant.id !== action.payload.id ? participant : {
+                                        ...participant,
+                                        votes: participant.votes+1
+                                    }
+                                )
+                            })
                         }
-                    ]
-                }
+                    )
+                })
+            }
+
+        // case "participantVote":
+        //     let pollToVote = polls.filter(poll => poll.id === action.payload.poll_id)
+        //     return{
+        //         polls: state.polls.map(poll => {
+
+        //         })
+        //     }
 
         default :
             return state

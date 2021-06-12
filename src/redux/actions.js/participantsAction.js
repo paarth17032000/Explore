@@ -37,19 +37,58 @@
 //     )
 // }
 
-export const AddPoll = (state,participants) => {
+export const AddPoll = (state, participants, participantVotes) => {
     const { numberOfParticipants } = state
     console.log('arrived in actions : ',state)
-    return(dispatch, getstate) => {
+    return(dispatch, getstate, { getFirebase, getFirestore }) => {
+        // const firebase = getFirebase()
+        const firestore = getFirestore()
+
         // async calls
+        firestore.collection('polls').add({
+            numberOfParticipants,
+            participants,
+            participantVotes,
+            authorFirstName: 'Paarth',
+            authorLastName: 'Agarwal',
+            authorId: 12312,
+            createdAt: new Date()
+        }).then(() => {
+            dispatch({
+                type: "Add_Poll",
+                payload: {
+                    numberOfParticipants,
+                    participants,
+                    participantVotes
+                }
+            })
+        }).catch((err) => {
+            dispatch({
+                type: "Add_Poll_Error",
+                payload: err
+            })
+        })
 
         // reducer call
-        dispatch({
-            type: "Add_Poll",
-            payload: {
-                numberOfParticipants,
-                participants
-            }
-        })
+        // dispatch({
+        //     type: "Add_Poll",
+        //     payload: {
+        //         numberOfParticipants,
+        //         participants,
+        //         participantVotes
+        //     }
+        // })
     }
+}
+
+export const participantVote = (poll_id,id) => {
+    return(
+        {
+            type: "participantVote",
+            payload: {
+                poll_id,
+                id
+            }
+        }
+    )
 }

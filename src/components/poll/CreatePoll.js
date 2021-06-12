@@ -53,12 +53,18 @@ class CreatePoll extends Component {
         const { classes } = this.props;
 
 
-        let arr = []
+        let arrParticipants = []
+        let arrVotes = []
         const PollParticipants = (name,index) => {
-            arr = [...arr, {
+            console.log(index)
+            arrParticipants = [...arrParticipants, {
                 id: index,
                 name: name
             }] 
+            arrVotes = [...arrVotes, {
+                id: index,
+                votes: 0
+            }]
         }
 
         let namesArr= [];
@@ -73,15 +79,15 @@ class CreatePoll extends Component {
             if(this.state.count === 1){
                 // console.log('sucess', this.state)
 
-                let index = 1;
+                let index = 0;
                 namesArr.forEach( item => {
                     PollParticipants(item,index)
                     // console.log(index,item)
                     index++
                 })
 
-                this.props.createPoll(this.state, arr)
-                console.log(this.state, arr)
+                this.props.createPoll(this.state, arrParticipants, arrVotes)
+                console.log(this.state, arrParticipants)
                 
                 this.props.history.push('/')
             }
@@ -162,7 +168,7 @@ class CreatePoll extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        createPoll: (state,arr) => dispatch(AddPoll(state,arr))
+        createPoll: (state, arrParticipants, arrVotes) => dispatch(AddPoll(state, arrParticipants, arrVotes))
     }
 }
 

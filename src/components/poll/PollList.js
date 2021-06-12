@@ -1,6 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Card, CardContent,Typography, makeStyles, CardActions, Button, Grid} from'@material-ui/core'
+import PollSummary from './PollSummary'
+import {  makeStyles, Grid} from'@material-ui/core'
 
 const useStyles = makeStyles({
     root: {
@@ -23,38 +23,18 @@ const useStyles = makeStyles({
     },
   });
 
-function PollList(props) {
+export default function PollList(props) {
+    // console.log(1111,props)
     const {polls} = props
     const classes = useStyles();
     return (
         <Grid container spacing={3} className={classes.root}>
            {polls.map((poll) => {
                return(
-                <Grid item xs={12} sm={6} md={4} lg={3} key={poll.id} >
-                  <Card className={classes.card} variant="outlined">
-                    <CardContent>
-                        <Typography className={classes.title} color="textSecondary" gutterBottom>
-                          {poll.id}
-                        </Typography>
-                        <Typography variant="h5" component="h2">
-                          {poll.desc}
-                        </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button size="small">Learn More</Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
+                <PollSummary key={poll.id} poll={poll} />
                )
            })} 
         </Grid>
     )
 }
 
-const mapStateToProps = (state) => {
-    return{
-        polls: state.participant.polls
-    }
-}
-
-export default connect(mapStateToProps)(PollList)

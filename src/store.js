@@ -1,8 +1,18 @@
-import { createStore, applyMiddleware} from 'redux'
+import { createStore, applyMiddleware, compose} from 'redux'
 import rootReducer from './redux/rootReducer'
 import thunk from 'redux-thunk'
+import fbConfig from './config/fbConfig' 
+import { reactReduxFirebase ,getFirebase } from 'react-redux-firebase'
+import { reduxFirestore, getFirestore } from 'redux-firestore'
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(
+    rootReducer, 
+    compose(
+        applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+        reduxFirestore(fbConfig),
+        reactReduxFirebase(fbConfig)
+    )
+);
 
 store.subscribe( () => {
     console.log('state change', store.getState())
@@ -20,9 +30,6 @@ store.subscribe( () => {
 // store.dispatch(participantVote(2))
 // store.dispatch(participantVote(4))
 // store.dispatch(participantVote(2))
-// store.dispatch(participantVote(3))
-// store.dispatch(participantVote(1))
-// store.dispatch(participantVote(1))
 
 
 export default store
