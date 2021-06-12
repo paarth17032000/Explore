@@ -49,7 +49,7 @@ const styles = (theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(0),
+    padding: theme.spacing(4),
   },
   icons: {
     color: 'white',
@@ -99,7 +99,7 @@ class Layout extends Component {
       {
           text: 'Create New Poll',
           icon: <AddBoxIcon className={classes.icons}/>,
-          path: '/create'
+          path: '/poll'
       },
       {
           text: 'Account',
