@@ -63,7 +63,7 @@
 // import * as actions from '../actions.js/actionTypes'
 
 
-let id = 3;
+// let id = 3;
 // init state []
 const initState = {
     polls : [

@@ -48,7 +48,7 @@ function SinglePoll(props) {
         })
         // console.log(newParticipantVotes)
         VoteParticipant(poll_id,newParticipantVotes)
-        props.history.push('/')
+        props.history.push('/dashboard')
     }
     
     if( poll ){

@@ -15,13 +15,25 @@ const useStyles = makeStyles( theme => ({
     }
 }))
 
-export default function Login() {
+export default function SignUp() {
     const classes = useStyles()
     return (
         <form 
         // onSubmit={}
         className={classes.root}
         >
+            <TextField 
+            type="text"
+            className={classes.field}
+            label="First Name"
+            placeholder="Enter First Name.... "
+            />
+            <TextField 
+            type="text"
+            className={classes.field}
+            label="Last Name"
+            placeholder="Enter Last Name.... "
+            />
             <TextField 
             type="email"
             className={classes.field}
@@ -37,10 +49,10 @@ export default function Login() {
             <Button 
             variant="contained"
             color="primary"
-            className={classes.field}
             type="submit"
+            className={classes.field}
             >
-                Login
+                Sign Up
             </Button>
         </form>
     )

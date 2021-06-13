@@ -1,18 +1,19 @@
 import './App.css'
-import {BrowserRouter} from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
-import Router from './Router'
-import Layout from './components/layout/Layout';
-import {newTheme} from './theme/Theme'
+import routes, { renderRoutes } from './Router'
+// import Layout from './components/layout/Layout';
+import { newTheme } from './theme/Theme'
 
 function App() {
   return (
     <MuiThemeProvider theme={newTheme}>
       <BrowserRouter>
-        <Layout>
+        {/* <Layout> */}
           <CssBaseline />
-          <Router />
-        </Layout>
+          {renderRoutes(routes)}
+          {/* <Router routes={routes} /> */}
+        {/* </Layout> */}
       </BrowserRouter>
     </MuiThemeProvider>
   );
