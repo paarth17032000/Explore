@@ -1,12 +1,21 @@
 import React from 'react'
-// import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
-export default function Guest({children}) {
-    // const { isAuth } 
+function Guest(props) {
+    const {children, auth} = props
 
-    // if( isAuth ) {
-    //     return <Redirect to='/dashboard' />
-    // } 
+    if( auth.uid ) {
+        return <Redirect to='/dashboard' />
+    } 
 
     return <>{children}</>
 }
+
+const mapStateToProps = (state) => {
+    return{
+        auth: state.firebase.auth
+    }
+}
+
+export default connect(mapStateToProps)(Guest)

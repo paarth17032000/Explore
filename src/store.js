@@ -10,13 +10,13 @@ const store = createStore(
     compose(
         applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
         reduxFirestore(fbConfig),
-        reactReduxFirebase(fbConfig)
+        reactReduxFirebase(fbConfig, {attachAuthIsReady: true})
     )
 );
 
-store.subscribe( () => {
-    console.log('state change', store.getState())
-})
+// store.subscribe( () => {
+//     console.log('state change', store.getState())
+// })
 
 // let state = {
 //     numberOfParticipants: 3,

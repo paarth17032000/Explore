@@ -97,6 +97,7 @@ const participantsReducer = (state = initState, action) => {
 
         case "Add_Poll":
             console.log('success')
+            return state
             // return{
             //     polls: [
             //         ...state.polls,
@@ -111,17 +112,20 @@ const participantsReducer = (state = initState, action) => {
 
         case "Add_Poll_Error":
             console.log('error : ',action.payload)
-            // return{
-            //     polls:[
+            return{
+                ...state
+                // polls:[
 
-            //     ]
-            // }
+                // ]
+            }
 
         case "Update_Poll":
             console.log('success ',11,action.payload)
+            return state
 
         case "Update_Poll_Error":
             console.log('error : ',77,action.payload)
+            return state
 
         case "participantVote":
             // let pollToVote = polls.filter(poll => poll.id === action.payload.poll_id)

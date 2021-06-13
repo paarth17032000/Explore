@@ -3,6 +3,7 @@ import PollList from '../poll/PollList'
 import { firestoreConnect } from 'react-redux-firebase'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+// import { Logout } from '../../redux/actions.js/authActions'
 
 function Dashboard(props) {
     const {data} = props
@@ -20,6 +21,13 @@ const mapStateToProps = (state) => {
         data: state.firestore.ordered.polls
     }
 }
+
+// const mapDispatchToProps = (dispatch) => {
+//     return{
+//         Logout: () => dispatch(Logout())
+//     }
+// }
+
 
 export default compose(
     connect(mapStateToProps),

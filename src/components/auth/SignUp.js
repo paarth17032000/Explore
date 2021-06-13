@@ -1,7 +1,11 @@
-import React from 'react'
-import { Button, makeStyles, TextField } from '@material-ui/core'
+import React, {Component} from 'react'
+import { SignUp } from '../../redux/actions.js/authActions'
+import { Button, TextField, Typography } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles'
+import { compose } from '@material-ui/system'
+import { connect } from 'react-redux'
 
-const useStyles = makeStyles( theme => ({
+const styles = theme => ({
     root: {
         display: "flex",
         justifyContent: "center",
@@ -13,47 +17,101 @@ const useStyles = makeStyles( theme => ({
     field: {
         margin: theme.spacing(2,0)
     }
-}))
+})
 
-export default function SignUp() {
-    const classes = useStyles()
-    return (
-        <form 
-        // onSubmit={}
-        className={classes.root}
-        >
-            <TextField 
-            type="text"
-            className={classes.field}
-            label="First Name"
-            placeholder="Enter First Name.... "
-            />
-            <TextField 
-            type="text"
-            className={classes.field}
-            label="Last Name"
-            placeholder="Enter Last Name.... "
-            />
-            <TextField 
-            type="email"
-            className={classes.field}
-            label="Email"
-            placeholder="Email.... "
-            />
-            <TextField 
-            type="password"
-            className={classes.field}
-            label="Password"
-            placeholder="Password.... "
-            />
-            <Button 
-            variant="contained"
-            color="primary"
-            type="submit"
-            className={classes.field}
+class RegisterPage extends Component{
+    constructor(props){
+        super(props)
+        this.state={
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: ''
+        }
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(this.state)
+        this.props.SignUp(this.state)
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    render(){
+        // const classes = useStyles()
+        const {classes, signUpError} = this.props
+        // console.log('signup', this.props)
+        return (
+            <form 
+            onSubmit={this.handleSubmit}
+            className={classes.root}
             >
-                Sign Up
-            </Button>
-        </form>
-    )
+                <TextField 
+                type="text"
+                className={classes.field}
+                name="firstName"
+                label="First Name"
+                placeholder="Enter First Name.... "
+                onChange={this.handleChange}
+                />
+                <TextField 
+                type="text"
+                className={classes.field}
+                name="lastName"
+                label="Last Name"
+                placeholder="Enter Last Name.... "
+                onChange={this.handleChange}
+                />
+                <TextField 
+                type="email"
+                className={classes.field}
+                name="email"
+                label="Email"
+                placeholder="Email...."
+                onChange={this.handleChange}
+                />
+                <TextField 
+                type="password"
+                className={classes.field}
+                name="password"
+                label="Password"
+                placeholder="Password...."
+                onChange={this.handleChange}
+                />
+                <Button 
+                variant="contained"
+                color="primary"
+                type="submit"
+                className={classes.field}
+                >
+                    Sign Up
+                </Button>
+                { signUpError ? (
+                    <Typography variant="h4" color="error">
+                        {signUpError}
+                    </Typography>
+                ) : null }
+            </form>
+        )
+    }
+    
 }
+
+const mapStateToProps = (state) => {
+    return{
+        signUpError: state.auth.signUpError
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        SignUp: (credentials) => dispatch(SignUp(credentials))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, {withTheme: true})(RegisterPage))

@@ -1,11 +1,10 @@
 import React, { Suspense, Fragment, lazy } from 'react'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Authenticated from './components/gaurds/Authenticated'
 import Guest from './components/gaurds/Guest'
 
 // console.log(routes)
 export const renderRoutes = (routes) => {
-    console.log(routes)
     return (
         <Suspense fallback={<div>Loading....</div>}>
             <Switch>
@@ -94,8 +93,3 @@ export default routes
 //         </Suspense>
 //     )
 // }
-
-
-{/* <Route exact path='/create' component={AddParticipants}/>
-<Route exact path='/participants' component={Participants} /> 
-<Route exact path='/polls' component={PollList} /> */}

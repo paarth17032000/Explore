@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
-import { Box, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core'
+import { Box, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography, Avatar, Button } from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -12,6 +12,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/styles';
 import Logo from '../../assests/images/logo.png'
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { Logout } from '../../redux/actions.js/authActions'
 
 const drawerWidth = 267;
 
@@ -67,6 +70,19 @@ const styles = (theme) => ({
   listItem: {
     height: '56px',
     // padding: theme.spacing(3,4,3)
+  },
+  space: {
+    flexGrow: 1
+  },
+  name: {
+    display: 'flex',
+    alignItems: 'center',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  avatar: {
+    backgroundColor: theme.palette.primary.main
   }
 });
 
@@ -87,14 +103,14 @@ class Layout extends Component {
   };
 
   render() {
-    const { window, classes } = this.props;
+    const { window, classes, Logout } = this.props;
     
 
     const menuItems = [
       {
           text: 'Dashboard',
           icon: <HomeIcon className={classes.icons}/>,
-          path: '/'
+          path: '/dashboard'
       },
       {
           text: 'Create New Poll',
@@ -145,6 +161,8 @@ class Layout extends Component {
     
     return (
       <div className={classes.root}>
+
+
         {/* Navbar */}
         <AppBar elevation={0} position="fixed" className={classes.appBar}>
           <Toolbar>
@@ -157,11 +175,23 @@ class Layout extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              Welcome
-            </Typography>
+            <Box className={classes.space}>
+               <Button 
+               onClick={Logout}
+               className={classes.space}
+               >
+                Log Out
+              </Button>
+            </Box>
+            <Box className={classes.name}>
+              <Typography variant="h6" className="font-20">
+                Paarth Agarwal
+              </Typography>
+              <Avatar className={classes.avatar}>{''}</Avatar>
+            </Box>
           </Toolbar>
         </AppBar>
+
 
         {/* SideDrawer */}
         <nav className={classes.drawer} aria-label="mailbox folders">
@@ -196,6 +226,7 @@ class Layout extends Component {
           </Hidden>
         </nav>
   
+
         {/* All the main content of pages */}
         <div className={classes.content}>
           <div className={classes.toolbar}></div>
@@ -206,4 +237,20 @@ class Layout extends Component {
   }
 }
 
-export default withStyles(styles, {withTheme: true})(Layout)
+const mapStateToProps = (state) => {
+  console.log(state)
+  return{
+
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        Logout: () => dispatch(Logout())
+    }
+}
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles, {withTheme: true})
+)(Layout)

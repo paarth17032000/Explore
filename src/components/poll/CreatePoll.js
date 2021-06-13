@@ -89,7 +89,7 @@ class CreatePoll extends Component {
                 this.props.createPoll(this.state, arrParticipants, arrVotes)
                 console.log(this.state, arrParticipants)
                 
-                this.props.history.push('/')
+                this.props.history.push('/dashboard')
             }
             this.setState({
                 count: this.state.count + 1
