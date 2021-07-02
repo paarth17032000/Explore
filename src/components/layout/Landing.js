@@ -38,10 +38,10 @@ const useStyles = makeStyles((theme) => ({
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+    // transition: theme.transitions.create(['margin', 'width'], {
+    //   easing: theme.transitions.easing.easeOut,
+    //   duration: theme.transitions.duration.enteringScreen,
+    // }),
     marginRight: drawerWidth,
   },
   title: {
@@ -59,35 +59,37 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
   },
   drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
+    // width: drawerWidth,
+    // flexShrink: 1,
   },
   drawerPaper: {
     width: drawerWidth,
   },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-start',
-  },
+  // drawerHeader: {
+  //   display: 'flex',
+  //   alignItems: 'center',
+  //   padding: theme.spacing(0, 1),
+  //   // necessary for content to be below app bar
+  //   ...theme.mixins.toolbar,
+  //   justifyContent: 'flex-start',
+  // },
+  drawerHeader: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginRight: -drawerWidth,
+    padding: theme.spacing(3,8),
+    backgroundColor: '#FFFFFF'
+    // transition: theme.transitions.create('margin', {
+    //   easing: theme.transitions.easing.sharp,
+    //   duration: theme.transitions.duration.leavingScreen,
+    // }),
+    // marginRight: -drawerWidth,
   },
   contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginRight: 0,
+    // transition: theme.transitions.create('margin', {
+    //   easing: theme.transitions.easing.easeOut,
+    //   duration: theme.transitions.duration.enteringScreen,
+    // }),
+    // marginRight: 0,
   },
   links: {
       '& > *': {
@@ -119,7 +121,54 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700
   },
   hero: {
-      backgroundColor: 'red'
+      flexGrow: 1,
+      padding: theme.spacing(8)
+  },
+  heroTitle: {
+    fontSize: '14px',
+    fontWeight: 800,
+    color: '#FD9835'
+  },
+  heroMain: {
+    fontSize: '44px',
+    fontWeight: 700,
+    color: '#020202',
+    marginTop: theme.spacing(1.5)
+  },
+  heroPara: {
+    fontSize: '16px',
+    color: '#020202',
+    marginTop: theme.spacing(5)
+  },
+  heroBtn: {
+    fontSize: '14px',
+    fontWeight: 700,
+    marginTop: theme.spacing(7),
+    padding: theme.spacing(1.5,2.5), 
+    border: '1px solid #2F3643',
+    backgroundColor: '#FD9835',
+    color: '#FFFFFF',
+    borderRadius: '12px',
+    cursor: 'pointer'
+  },
+  heroImg: {
+    width: '100%', 
+    height: 'auto'
+  },
+  howItWorks: {
+    padding: theme.spacing(8,0),
+    '& > *' : {
+      padding: theme.spacing(8)
+    }
+  },
+  howBoxHead: {
+    marginTop: theme.spacing(9.5)
+  },
+  howBox: {
+    height: '341px',
+    widht: '320px',
+    border: '2px solid #020202',
+    borderRadius: '24px',
   }
 }));
 
@@ -200,22 +249,57 @@ export default function PersistentDrawerRight() {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Container>
-            <Box className={classes.hero}>
-                <Grid container>
+        <Box className={classes.hero}>
+            <Box>
+                <Grid container spacing={5}>
                     <Grid item md={6} xs={12}>
-                        abcd
+                        <Box>
+                          <Typography className={classes.heroTitle}>
+                            POLLING SITE
+                          </Typography>
+                          <Typography className={classes.heroMain}>
+                            Let’s decide the winner by polling  
+                          </Typography>
+                          <Typography paragraph className={classes.heroPara}>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
+                            do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                          </Typography>
+                          <button className={classes.heroBtn}>
+                            Create a Poll
+                          </button>
+                        </Box>
                     </Grid>
                     <Grid item md={6} xs={12}>
-                        efgh
+                        <Box display='flex' justifyContent='center' alignItems='center'>
+                          <img className={classes.heroImg} src={'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80'} alt="img" />
+                        </Box>
                     </Grid>
                 </Grid>
             </Box>
-            <Typography paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua
+        </Box>
+        <Box className={classes.howItWorks}>
+          <Box>
+            <Typography className={classes.heroTitle}>
+              HOW IT WORKS
             </Typography>
-        </Container>
+            <Typography className={classes.heroMain}>
+              Simple Process to Create
+            </Typography>
+            <Grid container spacing={5} className={classes.howBoxHead}>
+              <Grid item md={4} xs={12}>
+                <Box className={classes.howBox}>abcd</Box>
+              </Grid>
+              <Grid item md={4} xs={12}>
+              <Box className={classes.howBox}>efgh</Box>
+              </Grid>
+              <Grid item md={4} xs={12}>
+              <Box className={classes.howBox}>ijkl</Box>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+
       </main>
         <Hidden mdUp>
             <Drawer
@@ -234,7 +318,7 @@ export default function PersistentDrawerRight() {
                 </div>
                 <Divider />
                 <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                {['Home', 'How to use', 'Features', 'Contact Us'].map((text, index) => (
                     <ListItem button key={text}>
                     <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                     <ListItemText primary={text} />
